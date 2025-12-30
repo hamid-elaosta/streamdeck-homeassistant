@@ -119,6 +119,17 @@ export class Settings {
     }
 
     if (settings.version === 5) {
+      let settingsV6 = { ...settings }
+      settingsV6.version = 6
+
+      if (!settingsV6.display.fontSize) {
+        settingsV6.display.fontSize = 48
+      }
+
+      return this.parse(settingsV6)
+    }
+
+    if (settings.version === 6) {
       return settings
     }
   }

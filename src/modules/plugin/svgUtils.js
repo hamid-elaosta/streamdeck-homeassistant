@@ -10,7 +10,7 @@ export class SvgUtils {
       width: this.buttonRes.width / 2,
       height: this.buttonRes.height / 2
     }
-    this.fontSize = 56
+    this.fontSize = 48
     this.lineAttr = {
       fill: '#FFF',
       'font-family': 'sans-serif',
@@ -19,6 +19,15 @@ export class SvgUtils {
       'text-anchor': 'middle'
     }
     this.snap = Snap(this.buttonRes.width, this.buttonRes.height)
+  }
+
+  /**
+   * Set the font size for text rendering.
+   * @param fontSize : number
+   */
+  setFontSize(fontSize) {
+    this.fontSize = fontSize
+    this.lineAttr['font-size'] = `${this.fontSize}px`
   }
 
   /**
