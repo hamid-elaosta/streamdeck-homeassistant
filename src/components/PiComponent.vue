@@ -221,6 +221,21 @@
         </div>
       </div>
 
+      <template v-if="controllerType !== 'Encoder'">
+        <div class="form-number">
+          <label class="form-label" for="fontSize"> Font size ( {{ fontSize }} px )</label>
+          <input
+            id="fontSize"
+            v-model="fontSize"
+            class="form-range"
+            max="64"
+            min="32"
+            step="1"
+            type="range"
+          />
+        </div>
+      </template>
+
       <h1>{{ controllerType }} actions</h1>
 
       <AccordeonComponent id="presses" class="mb-2">
@@ -365,6 +380,7 @@ const useCustomButtonLabels = ref(false)
 const buttonLabels = ref('')
 const enableServiceIndicator = ref(true)
 const iconSettings = ref('PREFER_PLUGIN')
+const fontSize = ref(48)
 const availableEntityDomains = ref([])
 const availableEntities = ref([])
 const availableServiceDomains = ref([])
@@ -427,6 +443,7 @@ onMounted(() => {
       buttonTitle.value = settings['display']['buttonTitle'] || '{{friendly_name}}'
       useCustomButtonLabels.value = settings['display']['useCustomButtonLabels']
       buttonLabels.value = settings['display']['buttonLabels']
+      fontSize.value = settings['display']['fontSize'] || 48
       serviceShortPress.value = settings['button']['serviceShortPress']
       serviceLongPress.value = settings['button']['serviceLongPress']
       serviceTap.value = settings['button']['serviceTap']
@@ -556,7 +573,7 @@ function saveGlobalSettings() {
 
 function saveSettings() {
   let settings = {
-    version: 5,
+    version: 6,
 
     controllerType: controllerType.value,
 
@@ -568,6 +585,7 @@ function saveSettings() {
       iconSettings: iconSettings.value,
       useCustomButtonLabels: useCustomButtonLabels.value,
       buttonLabels: buttonLabels.value,
+      fontSize: fontSize.value,
       useStateImagesForOnOffStates: useStateImagesForOnOffStates.value // determined by action ID (manifest)
     },
 

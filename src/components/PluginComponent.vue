@@ -264,6 +264,8 @@ function updateContextState(currentContext, domain, stateObject) {
     renderingConfig.labelTemplates = contextSettings.display.buttonLabels.split('\n')
   }
 
+  svgUtils.setFontSize(contextSettings.display.fontSize)
+
   if (isEncoder(contextSettings)) {
     if (!renderingConfig.feedbackLayout) {
       renderingConfig.feedbackLayout = '$A1'
