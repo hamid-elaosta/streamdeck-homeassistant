@@ -4,7 +4,7 @@ import { defineConfig } from 'vite'
 import vue from '@vitejs/plugin-vue'
 import ViteYaml from '@modyfi/vite-plugin-yaml'
 import path from 'path'
-import RestartStreamDeck from './src/vite/RestartStreamDeck.js'
+import RestartOpenDeck from './src/vite/RestartOpenDeck.js'
 
 const __filename = fileURLToPath(import.meta.url)
 const __dirname = path.dirname(__filename)
@@ -14,8 +14,16 @@ export default defineConfig({
   plugins: [
     vue(),
     ViteYaml(),
-    RestartStreamDeck()
+    RestartOpenDeck(),
   ],
+  css: {
+    preprocessorOptions: {
+      scss: {
+        api: 'modern-external',
+        quietDeps: true,
+      },
+    },
+  },
   resolve: {
     alias: {
       '@': fileURLToPath(new URL('./src', import.meta.url)),

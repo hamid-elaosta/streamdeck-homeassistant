@@ -10,7 +10,7 @@ export class SvgUtils {
       width: this.buttonRes.width / 2,
       height: this.buttonRes.height / 2
     }
-    this.fontSize = 48
+    this.fontSize = 56
     this.lineAttr = {
       fill: '#FFF',
       'font-family': 'sans-serif',
@@ -92,7 +92,7 @@ export class SvgUtils {
       const targetWidth = this.buttonRes.width / 1.3
       const scaleFactor = Math.min(targetHeight / iconHeight, targetWidth / iconWidth)
       const xPos = (this.buttonRes.width - iconWidth * scaleFactor) / 2 - iconBBox.x * scaleFactor
-      const yPos = (this.halfRes.height - iconHeight * scaleFactor) / 2 - iconBBox.y * scaleFactor
+      const yPos = (this.buttonRes.height/6 - iconHeight)
       iconSVG.transform(`translate(${xPos} ${yPos}) scale(${scaleFactor})`)
     }
 
@@ -124,13 +124,13 @@ export class SvgUtils {
   }
 
   #drawText(text, lineNr) {
-    const escapedText = urlencode(text)
-    const quarterHeight = this.buttonRes.height / 4
+    const safeText = text.toString().replace(/%/g, '%25').replace(/#/g, '%23');
+    const thirdHeight = this.buttonRes.height / 3
     this.snap
       .text(
         0,
-        quarterHeight - (quarterHeight * 1.2 - this.fontSize) / 2 + lineNr * quarterHeight,
-        escapedText
+        thirdHeight - (thirdHeight * 1.2 - this.fontSize) / 2 + lineNr * thirdHeight,
+        safeText
       )
       .attr(this.lineAttr)
       .transform(`translateX(${this.halfRes.width})`)
